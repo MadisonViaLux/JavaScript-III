@@ -20,7 +20,7 @@ what the "this" is bound too.
 function and allows it to be bound to an 
 object.
 
-* 4. 
+* 4. Explicit Bonding alows you to bond in detail.
 
 *
 * write out a code example of each explanation above
@@ -28,7 +28,12 @@ object.
 
 // Principle 1
 
+function example(beds){
+    console.log(this);
+    return beds;
+}
 
+example("All of them");
 
 // Principle 2
 
@@ -86,3 +91,23 @@ Army.talking();
 
 // Principle 4
 
+function testing(greeter) {
+    this.greeting = 'Hello there, ';
+    this.greeter = greeter;
+    this.talking = function() {
+        console.log(this.greeting + this.greeter);
+        console.log(this);
+    };
+}
+
+
+const Leggy = new testing('Army');
+const Army = new testing('Leggy');
+
+// whenever you're using .call .apply .bond methods, it allows for more detailed Bonding.
+Leggy.talking.call(Army);
+Army.talking.apply(Leggy);
+
+
+Leggy.talking();
+Army.talking();
